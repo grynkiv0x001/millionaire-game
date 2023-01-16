@@ -1,0 +1,12 @@
+@use '@/styles/variables/colors' as colors;
+@use '@/styles/variables/typography' as fonts;
+
+.text {
+  color: colors.$black-100;
+  font-family: fonts.$primary;
+
+  &--h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+}

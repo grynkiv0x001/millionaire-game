@@ -1,0 +1,30 @@
+@use '@/styles/variables/colors' as colors;
+@use '@/styles/variables/typography' as fonts;
+
+$btn-primary: colors.$orange-100;
+$btn-primary-pressed: colors.$orange-120;
+$btn-primary-hover: colors.$orange-80;
+
+.button {
+  padding: 16px 24px;
+
+  border: none;
+  border-radius: 8px;
+
+  color: colors.$white-100;
+  font-family: fonts.$primary;
+  font-size: 14px;
+  cursor: pointer;
+
+  &--primary {
+    background-color: $btn-primary;
+
+    &:hover {
+      background-color: $btn-primary-hover;
+    }
+
+    &:active {
+      background-color: $btn-primary-pressed;
+    }
+  }
+}
