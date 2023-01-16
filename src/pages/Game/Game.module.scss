@@ -1,0 +1,24 @@
+@use '@/styles/variables/colors' as colors;
+@use '@/styles/media' as media;
+
+.game {
+  &__header {
+    @include media.min-width-768 {
+      display: none;
+    }
+  }
+
+  &__screen {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    background-color: colors.$black-5;
+  }
+
+  &__sidebar {
+    display: none;
+
+    @include media.min-width-768 {
+      display: block;
+    }
+  }
+}
