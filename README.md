@@ -1,7 +1,7 @@
 # About the project
 
 This project is an example of popular game 'Who wants to be a millionaire'.\
-Link to the working deployed demo: [https://grynkiv0x001.github.io/millionaire-game](https://grynkiv0x001.github.io/millionaire-game)
+Link to the working deployed demo: [https://millionaire-game-a0a96.web.app/](https://millionaire-game-a0a96.web.app/)
 
 ### Technology used in this project:
 
