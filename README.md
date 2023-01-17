@@ -29,6 +29,11 @@ To answer the question on the Game page you'll need to:
 
 To see Rewards player needs to look up to the right sidebar (on computer/laptop) or to click a menu button at the top of the screen (on mobile).
 
+Future releases:
+- Add multi-select opportunity (now wip)
+- Add global store
+- Add user profile
+
 ### **Have fun!**
 
 ---
