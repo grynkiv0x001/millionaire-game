@@ -13,7 +13,7 @@
     flex-direction: column;
     background-color: colors.$black-5;
 
-    @include media.min-width-768 {
+    @include media.min-width-1024 {
       display: grid;
       grid-template-columns: 3fr 1fr;
     }

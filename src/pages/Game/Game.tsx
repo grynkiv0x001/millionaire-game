@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { config } from '@/config';
@@ -16,9 +16,11 @@ export const Game = () => {
   const [reward, setReward] = useState(questions[0].reward);
   const [gameState, setGameState] = useState(true);
 
-  if (!gameState) {
-    navigate('/finish?reward=' + reward);
-  }
+  useEffect(() => {
+    if (!gameState) {
+      navigate('/finish?reward=' + reward);
+    }
+  }, [gameState]);
 
   return (
     <div className={styles.game}>

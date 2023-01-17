@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { QuestionType } from '@/core/models';
 
@@ -21,27 +21,43 @@ export const Question = ({
   handleGameState
 }: QuestionPropTypes) => {
   const [correct, setCorrect] = useState(false);
+  const [incorrect, setIncorrect] = useState(false);
+  const [resetAnswerState, setResetAnswerState] = useState(false);
 
-  const handleCheckAnswer = (isAnswerCorrect: boolean) => {
-    if (question.id === 12) {
-      setReward(question.reward);
-      handleGameState(false);
-    }
-
-    if (!isAnswerCorrect) {
-      setReward(question.reward);
-      handleGameState(false);
-    }
-
-    if (isAnswerCorrect) {
-      setCorrect(true);
-    }
-
-    if (correct && isAnswerCorrect) {
+  const handleCorrect = () => {
+    setTimeout(() => {
       setReward(question.reward * 2);
+      setCorrect(false);
+      setResetAnswerState(true);
       nextQuestion(question.id);
-    }
+    }, 1000);
   };
+
+  const handleIncorrect = () => {
+    setReward(question.reward);
+
+    setTimeout(() => {
+      handleGameState(false);
+    }, 1000);
+  };
+
+  useEffect(() => {
+    if (correct) {
+      handleCorrect();
+    }
+
+    if (incorrect) {
+      handleIncorrect();
+    }
+
+    setResetAnswerState(false);
+  }, [correct, incorrect]);
+
+  useEffect(() => {
+    if (question.id === 12) {
+      handleGameState(false);
+    }
+  }, [question]);
 
   return (
     <div className={styles.question}>
@@ -53,8 +69,9 @@ export const Question = ({
           <AnswerCell
             key={answer.id}
             answer={answer}
-            checkAnswer={handleCheckAnswer}
-            // answerState={}
+            setCorrect={setCorrect}
+            setIncorrect={setIncorrect}
+            resetAnswerState={resetAnswerState}
           />
         ))}
       </div>

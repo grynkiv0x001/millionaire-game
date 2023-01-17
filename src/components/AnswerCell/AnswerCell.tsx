@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { AnswerType } from '@/core/models';
 
@@ -13,21 +13,42 @@ export const AnswerState = {
 
 type AnswerCellPropTypes = {
   answer: AnswerType;
-  // answerState: keyof typeof AnswerState | string;
-  checkAnswer: (correct: boolean) => void;
+  resetAnswerState: boolean;
+  setCorrect: (correct: boolean) => void;
+  setIncorrect: (incorrect: boolean) => void;
 };
 
 export const AnswerCell = ({
   answer,
-  // answerState = AnswerState.correct,
-  checkAnswer
+  resetAnswerState,
+  setCorrect,
+  setIncorrect
 }: AnswerCellPropTypes) => {
   const answersVariants = 'ABCD';
   const [answerState, setAnswerState] = useState('');
 
+  useEffect(() => {
+    if (resetAnswerState) {
+      setAnswerState('');
+    }
+  }, [resetAnswerState]);
+
+  const handleCheckAnswer = (isAnswerCorrect: boolean) => {
+    if (isAnswerCorrect) {
+      setAnswerState(AnswerState.correct);
+      setCorrect(true);
+    } else {
+      setAnswerState(AnswerState.incorrect);
+      setIncorrect(true);
+    }
+  };
+
   const handleAnswerClick = () => {
     setAnswerState(AnswerState.selected);
-    checkAnswer(answer.correct);
+
+    if (answerState === AnswerState.selected) {
+      handleCheckAnswer(answer.correct);
+    }
   };
 
   return (
