@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { config } from '@/config';
 
 import styles from './Game.module.scss';
+import { MoneyList } from '@/components';
 
 export const Game = () => {
   const { questions } = config;
@@ -13,12 +14,13 @@ export const Game = () => {
   return (
     <div className={styles.game}>
       {drawerOpened ? (
-        // TODO: add drawer
-        <div></div>
+        <MoneyList />
       ) : (
         <div className={styles.game__screen}>
           {/* TODO: Add game screen */}
-          <div className={styles.game__sidebar}>{/* TODO: Add sidebar */}</div>
+          <div className={styles.game__sidebar}>
+            <MoneyList />
+          </div>
         </div>
       )}
     </div>

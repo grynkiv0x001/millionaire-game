@@ -1,0 +1,11 @@
+.answer-cell {
+  padding: 0 10px;
+
+  &--selected {
+    color: antiquewhite;
+  }
+
+  &--correct {
+    color: green;
+  }
+}

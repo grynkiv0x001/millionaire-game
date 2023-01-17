@@ -1,0 +1,20 @@
+@use '@/styles/variables/colors' as colors;
+@use '@/styles/media' as media;
+
+.money-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background-color: colors.$black-5;
+
+  @include media.min-width-768 {
+    background-color: colors.$white-100;
+  }
+
+  &__item {
+    &--current {
+      color: colors.$orange-100;
+    }
+  }
+}

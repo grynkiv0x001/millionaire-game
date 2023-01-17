@@ -1,0 +1,9 @@
+@use '@/styles/variables/colors' as colors;
+
+.reward-cell {
+  text-align: center;
+
+  &--active {
+    background-color: black;
+  }
+}
