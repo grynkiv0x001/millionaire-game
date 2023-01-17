@@ -3,3 +3,15 @@
     @content;
   }
 }
+
+@mixin min-width-1024 {
+  @media screen and (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin min-width-2048 {
+  @media screen and (min-width: 2048px) {
+    @content;
+  }
+}

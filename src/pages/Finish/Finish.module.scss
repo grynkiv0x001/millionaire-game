@@ -1,0 +1,48 @@
+@use '@/styles/media' as media;
+@use '@/styles/variables/colors' as colors;
+@use '@/styles/variables/sizes' as sizes;
+
+.finish {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  @include media.min-width-768 {
+    max-width: 600px;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 64px;
+  }
+
+  &__sub-heading {
+    margin-top: 24px;
+    text-align: center;
+    color: colors.$black-40;
+    font-size: sizes.$mobile-sub-heading;
+
+    @include media.min-width-768 {
+      font-size: sizes.$desktop-sub-heading;
+      text-align: left;
+    }
+  }
+
+  &__heading {
+    margin-top: 24px;
+    text-align: center;
+    font-size: sizes.$mobile-heading;
+
+    @include media.min-width-768 {
+      font-size: sizes.$desktop-heading;
+      text-align: left;
+    }
+  }
+
+  &__button {
+    width: 80%;
+    max-width: 300px;
+    margin-bottom: 48px;
+  }
+}

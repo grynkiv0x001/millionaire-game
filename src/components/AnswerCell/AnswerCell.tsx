@@ -1,5 +1,6 @@
+import { useEffect, useState } from 'react';
+
 import { AnswerType } from '@/core/models';
-import { Cell } from '@/shared';
 
 import styles from './AnswerCell.module.scss';
 
@@ -12,23 +13,62 @@ export const AnswerState = {
 
 type AnswerCellPropTypes = {
   answer: AnswerType;
-  answerState: keyof typeof AnswerState | string;
-  checkAnswer: (correct: boolean) => void;
+  resetAnswerState: boolean;
+  setCorrect: (correct: boolean) => void;
+  setIncorrect: (incorrect: boolean) => void;
 };
 
 export const AnswerCell = ({
   answer,
-  answerState = AnswerState.correct,
-  checkAnswer
+  resetAnswerState,
+  setCorrect,
+  setIncorrect
 }: AnswerCellPropTypes) => {
   const answersVariants = 'ABCD';
+  const [answerState, setAnswerState] = useState('');
+
+  useEffect(() => {
+    if (resetAnswerState) {
+      setAnswerState('');
+    }
+  }, [resetAnswerState]);
+
+  const handleCheckAnswer = (isAnswerCorrect: boolean) => {
+    if (isAnswerCorrect) {
+      setAnswerState(AnswerState.correct);
+      setCorrect(true);
+    } else {
+      setAnswerState(AnswerState.incorrect);
+      setIncorrect(true);
+    }
+  };
+
+  const handleAnswerClick = () => {
+    setAnswerState(AnswerState.selected);
+
+    if (answerState === AnswerState.selected) {
+      handleCheckAnswer(answer.correct);
+    }
+  };
 
   return (
-    <Cell
-      className={`${styles['answer-cell']}}`}
-      variant={answerState}
-      onClick={() => checkAnswer(answer.correct)}>{`${answersVariants[answer.id - 1]} ${
-      answer.answer
-    }`}</Cell>
+    <div
+      className={`${styles['answer-cell']} ${styles[`answer-cell--${answerState}`]}`}
+      onClick={handleAnswerClick}>
+      <div
+        className={`${styles['answer-cell__line']} ${styles['answer-cell__line--left']}  ${
+          styles[`answer-cell--line--${answerState}--left`]
+        }`}
+      />
+      <div className={styles['answer-cell__content']}>
+        <div className={styles['answer-cell__variant']}>{answersVariants[answer.id - 1]}</div>
+        <div className={styles['answer-cell__answer']}>{answer.answer}</div>
+      </div>
+      <div
+        className={`${styles['answer-cell__line']} ${
+          styles[`answer-cell__line--${answerState}--right`]
+        } ${styles['answer-cell__line--right']}`}
+      />
+    </div>
   );
 };

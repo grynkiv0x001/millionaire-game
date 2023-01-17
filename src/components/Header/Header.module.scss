@@ -6,3 +6,9 @@
   justify-content: flex-end;
   background-color: colors.$black-5;
 }
+
+.menu {
+  &__item {
+    cursor: pointer;
+  }
+}

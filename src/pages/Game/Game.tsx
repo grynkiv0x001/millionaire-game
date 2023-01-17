@@ -1,25 +1,42 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { config } from '@/config';
+import { Header, MoneyList, Question } from '@/components';
 
 import styles from './Game.module.scss';
-import { MoneyList } from '@/components';
 
 export const Game = () => {
+  const navigate = useNavigate();
+
   const { questions } = config;
 
   const [drawerOpened, setDrawerOpened] = useState(false);
   const [questionNumber, setQuestionNumber] = useState(questions[0].id - 1);
+  const [reward, setReward] = useState(questions[0].reward);
+  const [gameState, setGameState] = useState(true);
+
+  useEffect(() => {
+    if (!gameState) {
+      navigate('/finish?reward=' + reward);
+    }
+  }, [gameState]);
 
   return (
     <div className={styles.game}>
+      <Header className={styles.game__header} opened={drawerOpened} openDrawer={setDrawerOpened} />
       {drawerOpened ? (
-        <MoneyList />
+        <MoneyList currentReward={reward} />
       ) : (
         <div className={styles.game__screen}>
-          {/* TODO: Add game screen */}
+          <Question
+            question={questions[questionNumber]}
+            nextQuestion={setQuestionNumber}
+            setReward={setReward}
+            handleGameState={setGameState}
+          />
           <div className={styles.game__sidebar}>
-            <MoneyList />
+            <MoneyList currentReward={reward} />
           </div>
         </div>
       )}
