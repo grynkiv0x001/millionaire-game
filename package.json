@@ -24,7 +24,8 @@
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
     "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +53,8 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.0",
     "gh-pages": "^4.0.0",
+    "husky": ">=6",
+    "lint-staged": ">=10",
     "prettier": "^2.8.2",
     "react-app-rewire-alias": "^1.1.7",
     "react-app-rewired": "^2.2.1",
@@ -62,5 +65,9 @@
     "moduleNameMapper": {
       "^@shared(.*)$": "<rootDir>/src/shared$1"
     }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --fix",
+    "*.{js,css,md,html,json}": "prettier --cache --write"
   }
 }

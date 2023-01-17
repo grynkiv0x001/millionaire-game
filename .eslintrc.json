@@ -19,6 +19,7 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
     "prettier/prettier": "error",
+    "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-var-requires": "off",
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
