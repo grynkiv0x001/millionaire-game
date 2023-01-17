@@ -9,3 +9,9 @@
     @content;
   }
 }
+
+@mixin min-width-2048 {
+  @media screen and (min-width: 2048px) {
+    @content;
+  }
+}
