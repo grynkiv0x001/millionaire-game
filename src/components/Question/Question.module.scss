@@ -1,0 +1,30 @@
+@use '@/styles/variables/colors' as colors;
+@use '@/styles/media' as media;
+
+.question {
+  height: 100vh;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+  @include media.min-width-768 {
+    align-items: start;
+    justify-content: space-around;
+  }
+
+  &__answers {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include media.min-width-768 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      justify-content: center;
+      padding: 0 40px;
+    }
+  }
+}
