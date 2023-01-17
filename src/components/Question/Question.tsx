@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { QuestionType } from '@/core/models';
 
 import { Text } from '@/shared';
+import { AnswerCell } from '../AnswerCell/AnswerCell';
 
 import styles from './Question.module.scss';
 
@@ -20,16 +21,43 @@ export const Question = ({
   handleGameState
 }: QuestionPropTypes) => {
   const [correct, setCorrect] = useState(false);
-  const [answerState, setAnswerState] = useState('');
 
-  // const handleCheckAnswer = (isAnswerCorrect: boolean) => {};
+  const handleCheckAnswer = (isAnswerCorrect: boolean) => {
+    if (question.id === 12) {
+      setReward(question.reward);
+      handleGameState(false);
+    }
+
+    if (!isAnswerCorrect) {
+      setReward(question.reward);
+      handleGameState(false);
+    }
+
+    if (isAnswerCorrect) {
+      setCorrect(true);
+    }
+
+    if (correct && isAnswerCorrect) {
+      setReward(question.reward * 2);
+      nextQuestion(question.id);
+    }
+  };
 
   return (
     <div className={styles.question}>
-      <div className={styles.question__title}>
-        <Text variant="h1">{question.question}</Text>
+      <Text variant="h1" className={styles.question__title}>
+        {question.question}
+      </Text>
+      <div className={styles.question__answers}>
+        {question.answers.map((answer) => (
+          <AnswerCell
+            key={answer.id}
+            answer={answer}
+            checkAnswer={handleCheckAnswer}
+            // answerState={}
+          />
+        ))}
       </div>
-      <div className={styles.question__answers}></div>
     </div>
   );
 };

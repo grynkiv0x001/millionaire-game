@@ -1,5 +1,6 @@
 import { AnswerType } from '@/core/models';
 import { Cell } from '@/shared';
+import { useState } from 'react';
 
 import styles from './AnswerCell.module.scss';
 
@@ -12,23 +13,27 @@ export const AnswerState = {
 
 type AnswerCellPropTypes = {
   answer: AnswerType;
-  answerState: keyof typeof AnswerState | string;
+  // answerState: keyof typeof AnswerState | string;
   checkAnswer: (correct: boolean) => void;
 };
 
 export const AnswerCell = ({
   answer,
-  answerState = AnswerState.correct,
+  // answerState = AnswerState.correct,
   checkAnswer
 }: AnswerCellPropTypes) => {
   const answersVariants = 'ABCD';
+  const [answerState, setAnswerState] = useState('');
+
+  const handleAnswerClick = () => {
+    setAnswerState(AnswerState.selected);
+    checkAnswer(answer.correct);
+  };
 
   return (
     <Cell
-      className={`${styles['answer-cell']}}`}
+      className={`${styles['answer-cell']}`}
       variant={answerState}
-      onClick={() => checkAnswer(answer.correct)}>{`${answersVariants[answer.id - 1]} ${
-      answer.answer
-    }`}</Cell>
+      onClick={handleAnswerClick}>{`${answersVariants[answer.id - 1]} ${answer.answer}`}</Cell>
   );
 };

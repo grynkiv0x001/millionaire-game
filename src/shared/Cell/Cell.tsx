@@ -11,9 +11,17 @@ interface CellPropTypes extends React.HTMLAttributes<HTMLDivElement> {
 export const Cell: FC<CellPropTypes> = ({ children, className, variant, ...props }) => {
   return (
     <div className={`${className} ${styles.cell} ${styles[`cell--${variant}`]}`} {...props}>
-      <div className={`${styles.cell__line} ${styles['cell__line--left']}`}></div>
+      <div
+        className={`${styles.cell__line} ${styles['cell__line--left']}  ${
+          styles[`cell--line--${variant}--left`]
+        }`}
+      />
       <div className={styles.cell__content}>{children}</div>
-      <div className={`${styles.cell__line} ${styles['cell__line--right']}`}></div>
+      <div
+        className={`${styles.cell__line} ${styles[`cell__line--${variant}--right`]} ${
+          styles['cell__line--right']
+        }`}
+      />
     </div>
   );
 };
